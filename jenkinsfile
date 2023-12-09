@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Gitclone') {
+            steps {
+                echo 'cloning the code' 
+                git branch: 'main', url: 'https://github.com/Gautami2/node-jenkins.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
+        }
+         
+        stage('Deploy') {
+            steps {
+                sh 'scp -r ./dist/* ubuntu@65.2.80.247:/var/www/html/'
+            }
+        }
+    }
+}
