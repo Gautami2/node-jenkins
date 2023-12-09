@@ -29,7 +29,7 @@ pipeline {
          
         stage('Deploy') {
             steps {
-                sh 'scp -r ./dist/* ubuntu@65.2.80.247:/var/www/html/'
+                sh 'scp -r ./dist/* ubuntu@65.2.80.247:/home/ubuntu'
             }
         }
     }
